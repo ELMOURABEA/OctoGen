@@ -385,3 +385,56 @@ class LangGraphOrchestrator:
                     lines.append(f"  └─> {next_node}")
         
         return "\n".join(lines)
+    
+    async def execute_graph_from_steps(
+        self,
+        steps: List[Dict[str, Any]],
+        initial_state: Dict[str, Any],
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Execute a graph from a list of step definitions
+        
+        Args:
+            steps: List of step definitions with 'name' and 'operation'
+            initial_state: Initial state for the graph
+            context: Optional execution context
+            
+        Returns:
+            Execution results
+        """
+        # Create temporary graph
+        graph_name = f"temp_graph_{id(steps)}"
+        self.create_graph(graph_name)
+        
+        # Add start node
+        start_node = GraphNode(name="start", node_type=NodeType.START)
+        self.add_node(graph_name, start_node)
+        
+        prev_node = "start"
+        
+        # Add process nodes from steps
+        for step_def in steps:
+            node_name = step_def.get("name", f"step_{len(self.graphs[graph_name])}")
+            operation = step_def.get("operation")
+            
+            node = GraphNode(
+                name=node_name,
+                node_type=NodeType.PROCESS,
+                operation=operation
+            )
+            self.add_node(graph_name, node)
+            self.connect_nodes(graph_name, prev_node, node_name)
+            prev_node = node_name
+        
+        # Add end node
+        end_node = GraphNode(name="end", node_type=NodeType.END)
+        self.add_node(graph_name, end_node)
+        self.connect_nodes(graph_name, prev_node, "end")
+        
+        # Merge context into initial state if provided
+        if context:
+            initial_state = {**initial_state, **context}
+        
+        # Execute graph
+        return await self.execute_graph(graph_name, initial_state)

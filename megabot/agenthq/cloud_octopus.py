@@ -560,3 +560,46 @@ class CloudOctopus:
             },
             "note": "Costs scale with usage. Cloud auto-scaling optimizes costs."
         }
+    
+    # Wrapper methods for MegaBot integration
+    async def deploy(self, provider: str, regions: List[str], 
+                    config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Deploy to cloud (wrapper for deploy_to_cloud)
+        
+        Args:
+            provider: Cloud provider
+            regions: List of regions
+            config: Optional configuration (currently unused, for future use)
+            
+        Returns:
+            Deployment results
+        """
+        # deploy_to_cloud doesn't accept config parameter, so we ignore it for now
+        return await self.deploy_to_cloud(provider, regions)
+    
+    async def provision_storage(self, storage_types: Dict[str, bool],
+                               config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Provision storage (wrapper for provision_big_space)
+        
+        Args:
+            storage_types: Dictionary of storage types to provision
+            config: Optional configuration
+            
+        Returns:
+            Provisioning results
+        """
+        storage_config = {**storage_types}
+        if config:
+            storage_config.update(config)
+        return await self.provision_big_space(storage_config)
+    
+    def get_status(self) -> Dict[str, Any]:
+        """
+        Get status (wrapper for get_cloud_status)
+        
+        Returns:
+            Cloud status
+        """
+        return self.get_cloud_status()

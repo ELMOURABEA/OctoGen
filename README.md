@@ -1,4 +1,4 @@
-# MEGAGENT - XXXL MEGA BOT
+# OctoGen - AI Multi-Platform Integration
 
 <div align="center">
 
@@ -8,10 +8,10 @@ A unified AI agent integrating multiple cutting-edge platforms for comprehensive
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.2.0-brightgreen.svg)](https://github.com/ELMOURABEA/MEGAGENT/releases/tag/v1.2.0)
-[![Tests](https://img.shields.io/badge/tests-39%20passing-success.svg)](tests/)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/ELMOURABEA/OctoGen/releases/tag/v2.0.0)
+[![Tests](https://img.shields.io/badge/tests-106%20passing-success.svg)](tests/)
 [![GitHub Action](https://img.shields.io/badge/GitHub%20Action-Ready-blue.svg)](action.yml)
-[![Marketplace](https://img.shields.io/badge/GitHub%20Marketplace-Published-orange.svg)](https://github.com/marketplace/actions/megagent-ai-multi-platform-integration)
+[![Marketplace](https://img.shields.io/badge/GitHub%20Marketplace-Published-orange.svg)](https://github.com/marketplace/actions/octogen-ai-multi-platform-integration)
 
 </div>
 
@@ -29,7 +29,7 @@ A unified AI agent integrating multiple cutting-edge platforms for comprehensive
 
 ## 🏗️ Architecture
 
-MEGA-Bot integrates four powerful AI platforms:
+OctoGen integrates four powerful AI platforms:
 
 1. **GitHub Copilot** - Code generation, review, and documentation
 2. **Gemini 2.5 Pro** - Multimodal understanding with 2M token context
@@ -43,8 +43,8 @@ MEGA-Bot integrates four powerful AI platforms:
 Add to your workflow (`.github/workflows/your-workflow.yml`):
 
 ```yaml
-- name: Run MEGAGENT
-  uses: ELMOURABEA/MEGAGENT@v1.2.0
+- name: Run OctoGen
+  uses: ELMOURABEA/OctoGen@v2.0.0
   with:
     mode: 'query'
     prompt: 'Your AI query here'
@@ -57,8 +57,8 @@ See [MARKETPLACE.md](MARKETPLACE.md) for complete GitHub Action documentation.
 
 ```bash
 # Clone the repository
-git clone https://github.com/ELMOURABEA/MEGAGENT.git
-cd MEGAGENT
+git clone https://github.com/ELMOURABEA/OctoGen.git
+cd OctoGen
 
 # Install dependencies
 pip install -r requirements.txt
@@ -106,7 +106,7 @@ Customize `config.json` for your needs.
 
 ### Demo Mode
 
-Run the demo to see MEGA-Bot in action:
+Run the demo to see OctoGen in action:
 
 ```bash
 python main.py
@@ -127,7 +127,7 @@ from megabot import MegaBot
 import asyncio
 
 async def main():
-    # Initialize MEGA-Bot
+    # Initialize OctoGen
     bot = MegaBot()
     await bot.start()
     
@@ -202,10 +202,11 @@ updates = bot.get_updates(limit=10)
 
 ### Core Modules
 
-- **`megabot/core.py`** - Main orchestration layer
+- **`megabot/core.py`** - Main orchestration layer with Agent HQ integration
 - **`megabot/integrations/`** - AI platform integrations
 - **`megabot/database/`** - Research engine and storage
 - **`megabot/workflow/`** - Task scheduling and permissions
+- **`megabot/agenthq/`** - Agent orchestration with Octopus Brain
 
 ### Platform Integrations
 
@@ -217,12 +218,13 @@ Each platform integration provides:
 
 ## 📊 Database Schema
 
-MEGA-Bot maintains persistent storage for:
+OctoGen maintains persistent storage for:
 
 - Research cache (topic, platform, depth, results)
 - Query history (queries and responses)
 - Document updates (platform updates)
 - Workflow tasks (scheduled tasks)
+- Agent registry and orchestration logs
 
 ## 🔐 Permission System
 
@@ -299,7 +301,7 @@ setup_logging("INFO")  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
 
 ### Monetization & Subscription Tiers
 
-MEGA-Bot supports flexible subscription tiers:
+OctoGen supports flexible subscription tiers:
 
 ```python
 from megabot import MegaBot, Config
@@ -357,7 +359,7 @@ pip install -r requirements.txt
 pytest
 ```
 
-Current test coverage: 39 tests covering:
+Current test coverage: 106 tests covering:
 - Configuration management
 - AI platform integrations
 - Core functionality
@@ -366,6 +368,10 @@ Current test coverage: 39 tests covering:
 - Input validation and utilities
 - Monetization and subscription tiers
 - Advertising integration
+- Agent HQ orchestration
+- LangChain and LangGraph integration
+- Octopus Brain coordination
+- Cloud and enterprise deployment
 
 ## 🤝 Contributing
 
@@ -390,8 +396,8 @@ For questions and support, please open an issue on GitHub.
 
 <div align="center">
 
-**Built with ❤️ by the MEGAGENT Team**
+**Built with ❤️ by the OctoGen Team**
 
-*Integrating the power of multiple AI platforms into one unified solution*
+*Integrating the power of multiple AI platforms into one unified solution with Agent HQ orchestration*
 
 </div>

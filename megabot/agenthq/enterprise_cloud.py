@@ -563,3 +563,81 @@ class EnterpriseCloudOctogent:
             self.logger.info("🐙 Health check completed: All systems operational")
         
         return health_check
+    
+    # Wrapper methods for MegaBot integration
+    async def deploy_enterprise(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Deploy to enterprise cloud (wrapper)
+        
+        Args:
+            config: Deployment configuration (includes domain, regions, infrastructure)
+            
+        Returns:
+            Deployment results
+        """
+        # Extract infrastructure from config
+        infrastructure = config.get("infrastructure", {})
+        # Add domain and regions to infrastructure if they're in config
+        if "domain" in config:
+            infrastructure["domain"] = config["domain"]
+        if "regions" in config:
+            infrastructure["regions"] = config["regions"]
+        
+        result = await self.deploy_to_enterprise_cloud(infrastructure)
+        
+        # Add domain and regions to result if they were in config
+        if "domain" in config:
+            result["domain"] = config["domain"]
+        if "regions" in config:
+            result["regions"] = config["regions"]
+        
+        # Add endpoints based on regions
+        if "regions" in config:
+            result["endpoints"] = [
+                f"https://{config.get('domain', 'octogent.mycompany.com')}/{region}"
+                for region in config["regions"]
+            ]
+        
+        return result
+    
+    async def configure_infrastructure(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Configure infrastructure (wrapper)
+        
+        Args:
+            config: Infrastructure configuration
+            
+        Returns:
+            Configuration results
+        """
+        return await self.configure_custom_infrastructure(config)
+    
+    def get_status(self) -> Dict[str, Any]:
+        """
+        Get status (wrapper for get_octogent_status)
+        
+        Returns:
+            Enterprise octogent status
+        """
+        return self.get_octogent_status()
+    
+    def get_capacity(self) -> Dict[str, Any]:
+        """
+        Get capacity (wrapper for get_capacity_info)
+        
+        Returns:
+            Capacity information
+        """
+        return self.get_capacity_info()
+    
+    def estimate_costs(self, config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """
+        Estimate costs (wrapper for get_cost_estimate)
+        
+        Args:
+            config: Optional cost configuration
+            
+        Returns:
+            Cost estimation
+        """
+        return self.get_cost_estimate()

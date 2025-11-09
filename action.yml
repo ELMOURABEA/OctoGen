@@ -1,5 +1,5 @@
-name: 'MEGAGENT - AI Multi-Platform Integration'
-description: 'Unified AI agent integrating GitHub Copilot, Gemini, ChatGPT, and Grok for comprehensive research and automation'
+name: 'OctoGen - AI Multi-Platform Integration'
+description: 'Unified AI agent integrating GitHub Copilot, Gemini, ChatGPT, and Grok for comprehensive research and automation with Agent HQ orchestration'
 author: 'ELMOURABEA'
 
 branding:
@@ -48,7 +48,7 @@ inputs:
 
 outputs:
   result:
-    description: 'JSON result from the MEGAGENT operation'
+    description: 'JSON result from the OctoGen operation'
   
   platforms-used:
     description: 'Number of AI platforms that responded'
@@ -69,7 +69,7 @@ runs:
       run: |
         pip install -q python-dotenv pytest pytest-asyncio
     
-    - name: Install MEGAGENT
+    - name: Install OctoGen
       shell: bash
       run: |
         cd ${{ github.action_path }}
@@ -103,9 +103,9 @@ runs:
           echo "GROK_API_KEY=${{ inputs.grok-api-key }}" >> $GITHUB_ENV
         fi
     
-    - name: Run MEGAGENT
+    - name: Run OctoGen
       shell: bash
-      id: megagent
+      id: octogen
       run: |
         cd ${{ github.action_path }}
         python scripts/run_action.py \

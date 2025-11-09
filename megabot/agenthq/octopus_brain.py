@@ -386,3 +386,31 @@ class OctopusBrain:
             return [self.memory["working"]] if self.memory["working"] else []
         else:
             return []
+    
+    def get_status(self) -> Dict[str, Any]:
+        """
+        Get complete brain status
+        
+        Returns:
+            Status dictionary including tentacles, memory, and decision history
+        """
+        return {
+            "tentacles": {
+                "total": len(self.tentacles),
+                "active": len([t for t in self.tentacles.values() 
+                             if t["status"] == TentacleStatus.ACTIVE]),
+                "ready": len([t for t in self.tentacles.values() 
+                            if t["status"] == TentacleStatus.READY]),
+                "idle": len([t for t in self.tentacles.values() 
+                           if t["status"] == TentacleStatus.IDLE]),
+                "busy": len([t for t in self.tentacles.values() 
+                           if t["status"] == TentacleStatus.BUSY])
+            },
+            "memory": {
+                "short_term_items": len(self.memory["short_term"]),
+                "long_term_categories": len(self.memory["long_term"]),
+                "working_context": bool(self.memory["working"])
+            },
+            "decision_history": len(self.decision_history),
+            "task_queue": len(self.task_queue)
+        }
