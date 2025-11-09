@@ -3,6 +3,11 @@
 
 # Standard library async support (no additional package needed for asyncio)
 
+# LangChain for AI orchestration and chaining
+langchain>=0.1.0
+langchain-community>=0.0.20
+langchain-openai>=0.0.5
+
 # Optional: Add these packages if you want to integrate with actual APIs
 # openai>=1.0.0          # For ChatGPT integration
 # google-generativeai    # For Gemini integration
@@ -14,3 +19,8 @@ pytest-asyncio>=0.21.0
 
 # Configuration
 python-dotenv>=1.0.0
+
+# Python 3.8+ required
+# Java/JavaScript interoperability (optional)
+# py4j>=0.10.9           # For Python-Java bridge
+# node>=0.1.0            # For Python-Node.js bridge
