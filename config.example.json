@@ -1,0 +1,57 @@
+{
+  "api_keys": {
+    "copilot": "your-copilot-api-key",
+    "gemini": "your-gemini-api-key",
+    "chatgpt": "your-chatgpt-api-key",
+    "grok": "your-grok-api-key",
+    "bing_search": "your-bing-search-api-key",
+    "langchain": "your-langchain-llm-api-key"
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "megabot.db",
+    "research_cache_enabled": true
+  },
+  "workflow": {
+    "max_concurrent_tasks": 10,
+    "auto_update_interval": 3600,
+    "permission_level": "full"
+  },
+  "features": {
+    "deep_research": true,
+    "multi_tasking": true,
+    "auto_update": true,
+    "document_sync": true,
+    "copilot_search": true,
+    "langchain": true
+  },
+  "copilot_search": {
+    "enabled": true,
+    "endpoint": "https://api.bing.microsoft.com/v7.0/search",
+    "answer_endpoint": "https://api.bing.microsoft.com/v7.0/answers",
+    "max_results": 10,
+    "safe_search": "Moderate"
+  },
+  "langchain": {
+    "enabled": true,
+    "llm_provider": "openai",
+    "temperature": 0.7,
+    "max_tokens": 2000,
+    "enable_memory": true,
+    "enable_tools": true
+  },
+  "languages": {
+    "python": {
+      "version": "3.8+",
+      "async_support": true
+    },
+    "java": {
+      "bridge": "py4j",
+      "enabled": false
+    },
+    "javascript": {
+      "bridge": "python-shell",
+      "enabled": false
+    }
+  }
+}
