@@ -61,7 +61,7 @@ MEGA-Bot (XXXL MEGA BOT) is a unified AI agent that integrates multiple cutting-
 ## Project Structure
 
 ```
-MEGAGENT/
+OctoGen/
 ├── megabot/                    # Main package
 │   ├── __init__.py            # Package initialization
 │   ├── core.py                # Main MegaBot class

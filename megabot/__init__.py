@@ -1,9 +1,9 @@
 """
-MEGA-Bot - A unified AI agent integrating multiple platforms with Agent HQ orchestration
+OctoGen - A unified AI agent integrating multiple platforms with Agent HQ orchestration
 """
 
 __version__ = "2.0.0"
-__author__ = "MEGAGENT Team"
+__author__ = "OctoGen Team"
 
 from .core import MegaBot
 from .config import Config

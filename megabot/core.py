@@ -111,12 +111,12 @@ class MegaBot:
         return integrations
     
     async def start(self):
-        """Start MEGA-Bot with all services"""
+        """Start OctoGen with all services"""
         if self.running:
-            print("MEGA-Bot is already running")
+            print("OctoGen is already running")
             return
         
-        print("Starting XXXL MEGA BOT...")
+        print("Starting OctoGen with Agent HQ...")
         self.running = True
         
         # Start auto-update service if enabled
@@ -130,17 +130,18 @@ class MegaBot:
             await self.sync_documents()
             print("✓ Initial document sync completed")
         
-        print(f"✓ MEGA-Bot started with {len([i for i in self.integrations if i.is_available()])} active integrations")
+        print(f"✓ OctoGen started with {len([i for i in self.integrations if i.is_available()])} active integrations")
         print(f"  - Platforms: {', '.join([i.platform_name for i in self.integrations if i.is_available()])}")
+        print(f"  - Agent HQ: {len(self.agent_hq.list_agents())} agents registered")
         
         return True
     
     async def stop(self):
-        """Stop MEGA-Bot and all services"""
+        """Stop OctoGen and all services"""
         if not self.running:
             return
         
-        print("Stopping MEGA-Bot...")
+        print("Stopping OctoGen...")
         self.running = False
         
         # Stop auto-update
@@ -154,7 +155,7 @@ class MegaBot:
         await asyncio.gather(*self.background_tasks, return_exceptions=True)
         self.background_tasks.clear()
         
-        print("✓ MEGA-Bot stopped")
+        print("✓ OctoGen stopped")
     
     async def query(self, prompt: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """

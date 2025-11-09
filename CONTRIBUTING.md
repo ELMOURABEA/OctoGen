@@ -20,12 +20,12 @@ By participating in this project, you agree to maintain a respectful and inclusi
 1. Fork the repository
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/MEGAGENT.git
-   cd MEGAGENT
+   git clone https://github.com/YOUR_USERNAME/OctoGen.git
+   cd OctoGen
    ```
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/ELMOURABEA/MEGAGENT.git
+   git remote add upstream https://github.com/ELMOURABEA/OctoGen.git
    ```
 
 ## Development Setup

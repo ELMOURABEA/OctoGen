@@ -1,18 +1,18 @@
-# MEGAGENT - GitHub Marketplace Guide
+# OctoGen - GitHub Marketplace Guide
 
 ## Overview
 
-MEGAGENT is a unified AI agent that integrates multiple cutting-edge AI platforms (GitHub Copilot, Gemini, ChatGPT, and Grok) into your GitHub workflows. Use it to automate research, analysis, and AI-powered tasks directly in your CI/CD pipelines.
+OctoGen is a unified AI agent that integrates multiple cutting-edge AI platforms (GitHub Copilot, Gemini, ChatGPT, and Grok) into your GitHub workflows. Use it to automate research, analysis, and AI-powered tasks directly in your CI/CD pipelines.
 
 ## Installation
 
 ### As a GitHub Action
 
-Add MEGAGENT to your workflow:
+Add OctoGen to your workflow:
 
 ```yaml
-- name: Run MEGAGENT Query
-  uses: ELMOURABEA/MEGAGENT@v1.2.0
+- name: Run OctoGen Query
+  uses: ELMOURABEA/OctoGen@v1.2.0
   with:
     mode: 'query'
     prompt: 'What are the latest AI trends?'
@@ -22,7 +22,7 @@ Add MEGAGENT to your workflow:
 ### As a Python Package
 
 ```bash
-pip install git+https://github.com/ELMOURABEA/MEGAGENT.git
+pip install git+https://github.com/ELMOURABEA/OctoGen.git
 ```
 
 ## Usage Examples
@@ -40,8 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Analyze PR with MEGAGENT
-        uses: ELMOURABEA/MEGAGENT@v1.2.0
+      - name: Analyze PR with OctoGen
+        uses: ELMOURABEA/OctoGen@v1.2.0
         with:
           mode: 'query'
           prompt: 'Review this code for best practices and potential issues'
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deep Research
-        uses: ELMOURABEA/MEGAGENT@v1.2.0
+        uses: ELMOURABEA/OctoGen@v1.2.0
         id: research
         with:
           mode: 'research'
@@ -101,7 +101,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Generate Documentation
-        uses: ELMOURABEA/MEGAGENT@v1.2.0
+        uses: ELMOURABEA/OctoGen@v1.2.0
         with:
           mode: 'workflow'
           workflow-name: 'comprehensive_analysis'
@@ -123,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Query All AI Platforms
-        uses: ELMOURABEA/MEGAGENT@v1.2.0
+        uses: ELMOURABEA/OctoGen@v1.2.0
         id: digest
         with:
           mode: 'query'
@@ -167,7 +167,7 @@ jobs:
 
 | Output | Description |
 |--------|-------------|
-| `result` | JSON result from the MEGAGENT operation |
+| `result` | JSON result from the OctoGen operation |
 | `platforms-used` | Number of AI platforms that responded |
 | `synthesis` | Synthesized results from all platforms |
 
@@ -221,10 +221,10 @@ Store your API keys as GitHub secrets:
 
 ## Support
 
-- **Documentation**: [Full documentation](https://github.com/ELMOURABEA/MEGAGENT/blob/main/DOCUMENTATION.md)
-- **Issues**: [Report bugs or request features](https://github.com/ELMOURABEA/MEGAGENT/issues)
-- **Discussions**: [Community discussions](https://github.com/ELMOURABEA/MEGAGENT/discussions)
-- **Security**: [Report security issues](https://github.com/ELMOURABEA/MEGAGENT/blob/main/SECURITY.md)
+- **Documentation**: [Full documentation](https://github.com/ELMOURABEA/OctoGen/blob/main/DOCUMENTATION.md)
+- **Issues**: [Report bugs or request features](https://github.com/ELMOURABEA/OctoGen/issues)
+- **Discussions**: [Community discussions](https://github.com/ELMOURABEA/OctoGen/discussions)
+- **Security**: [Report security issues](https://github.com/ELMOURABEA/OctoGen/blob/main/SECURITY.md)
 
 ## License
 
@@ -236,13 +236,13 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## Links
 
-- **Repository**: https://github.com/ELMOURABEA/MEGAGENT
-- **Issues**: https://github.com/ELMOURABEA/MEGAGENT/issues
-- **Marketplace**: https://github.com/marketplace/actions/megagent-ai-multi-platform-integration
+- **Repository**: https://github.com/ELMOURABEA/OctoGen
+- **Issues**: https://github.com/ELMOURABEA/OctoGen/issues
+- **Marketplace**: https://github.com/marketplace/actions/octogen-ai-multi-platform-integration
 - **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
-**Built with ❤️ by the MEGAGENT Team**
+**Built with ❤️ by the OctoGen Team**
 
 *Integrating the power of multiple AI platforms into your GitHub workflows*
