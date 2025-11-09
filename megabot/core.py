@@ -1,5 +1,5 @@
 """
-Core MEGA-Bot implementation - XXXL MEGA BOT
+Core OctoGen implementation with Agent HQ integration
 """
 import asyncio
 from typing import Dict, Any, List, Optional
@@ -15,22 +15,26 @@ from .workflow import TaskScheduler, PermissionManager, AutoUpdateManager
 from .utils import get_logger, validate_query, validate_topic, sanitize_input
 from .monetization import MonetizationManager
 from .advertising import AdvertisingCore
+from .agenthq import AgentHQCoordinator
 
 
 class MegaBot:
     """
-    XXXL MEGA BOT - Unified AI agent integrating multiple platforms
+    OctoGen - Unified AI agent integrating multiple platforms with Agent HQ
     
     Features:
     - Deep research across multiple AI platforms
     - Database workflow with full permissions
     - Multi-tasking with auto-update capabilities
     - Integration with Co-Pilot, Gemini 2.5 Pro, ChatGPT 5, and Grok 4 Super
+    - Agent HQ orchestration with Octopus Brain
+    - LangChain and LangGraph integration
+    - Cloud and enterprise deployment capabilities
     """
     
     def __init__(self, config: Optional[Config] = None):
         """
-        Initialize MEGA-Bot
+        Initialize OctoGen
         
         Args:
             config: Configuration object (creates default if not provided)
@@ -46,6 +50,13 @@ class MegaBot:
         
         # Initialize research engine
         self.research_engine = ResearchEngine(self.integrations, self.storage)
+        
+        # Initialize Agent HQ Coordinator
+        self.agent_hq = AgentHQCoordinator(
+            self.integrations,
+            self.storage,
+            self.logger
+        )
         
         # Initialize workflow components
         self.permission_manager = PermissionManager(
@@ -84,7 +95,7 @@ class MegaBot:
         self.running = False
         self.background_tasks: List[asyncio.Task] = []
         
-        self.logger.debug("MEGA-Bot initialized successfully")
+        self.logger.debug("OctoGen initialized successfully with Agent HQ")
     
     def _init_integrations(self) -> List:
         """Initialize all AI platform integrations"""
@@ -100,12 +111,12 @@ class MegaBot:
         return integrations
     
     async def start(self):
-        """Start MEGA-Bot with all services"""
+        """Start OctoGen with all services"""
         if self.running:
-            print("MEGA-Bot is already running")
+            print("OctoGen is already running")
             return
         
-        print("Starting XXXL MEGA BOT...")
+        print("Starting OctoGen with Agent HQ...")
         self.running = True
         
         # Start auto-update service if enabled
@@ -119,17 +130,18 @@ class MegaBot:
             await self.sync_documents()
             print("✓ Initial document sync completed")
         
-        print(f"✓ MEGA-Bot started with {len([i for i in self.integrations if i.is_available()])} active integrations")
+        print(f"✓ OctoGen started with {len([i for i in self.integrations if i.is_available()])} active integrations")
         print(f"  - Platforms: {', '.join([i.platform_name for i in self.integrations if i.is_available()])}")
+        print(f"  - Agent HQ: {len(self.agent_hq.list_agents())} agents registered")
         
         return True
     
     async def stop(self):
-        """Stop MEGA-Bot and all services"""
+        """Stop OctoGen and all services"""
         if not self.running:
             return
         
-        print("Stopping MEGA-Bot...")
+        print("Stopping OctoGen...")
         self.running = False
         
         # Stop auto-update
@@ -143,7 +155,7 @@ class MegaBot:
         await asyncio.gather(*self.background_tasks, return_exceptions=True)
         self.background_tasks.clear()
         
-        print("✓ MEGA-Bot stopped")
+        print("✓ OctoGen stopped")
     
     async def query(self, prompt: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
@@ -262,7 +274,7 @@ class MegaBot:
         print("✓ Document sync completed")
     
     def get_status(self) -> Dict[str, Any]:
-        """Get current status of MEGA-Bot"""
+        """Get current status of OctoGen"""
         status = {
             "running": self.running,
             "integrations": {
@@ -292,7 +304,8 @@ class MegaBot:
             "last_updates": {
                 platform: self.auto_update_manager.get_last_update_time(platform)
                 for platform in [i.platform_name for i in self.integrations if i.is_available()]
-            }
+            },
+            "agent_hq": self.agent_hq.get_status()
         }
         
         # Add monetization info if enabled
@@ -472,3 +485,283 @@ class MegaBot:
             
             return result
         return {"status": "disabled", "message": "Advertising not enabled"}
+    
+    # ===== Agent HQ Methods =====
+    
+    def list_agents(self, status: Optional[str] = None) -> List[Dict[str, Any]]:
+        """
+        List all registered agents
+        
+        Args:
+            status: Optional filter by status (active, available, inactive)
+            
+        Returns:
+            List of agent information dictionaries
+        """
+        return self.agent_hq.list_agents(status)
+    
+    def get_agent_info(self, agent_name: str) -> Optional[Dict[str, Any]]:
+        """
+        Get information about a specific agent
+        
+        Args:
+            agent_name: Name of the agent
+            
+        Returns:
+            Agent information dictionary or None
+        """
+        return self.agent_hq.get_agent_info(agent_name)
+    
+    async def orchestrate_agents(
+        self,
+        task: str,
+        agents: Optional[List[str]] = None,
+        mode: str = "sequential",
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Orchestrate multiple agents to complete a task
+        
+        Args:
+            task: Task description
+            agents: List of agent names (or None for automatic selection)
+            mode: Orchestration mode (sequential, parallel, adaptive)
+            context: Optional context information
+            
+        Returns:
+            Orchestration results
+        """
+        return await self.agent_hq.orchestrate(task, agents, mode, context)
+    
+    async def agent_hq_self_update(self) -> Dict[str, Any]:
+        """
+        Trigger Agent HQ self-update
+        
+        Returns:
+            Update results
+        """
+        return await self.agent_hq.self_update()
+    
+    async def agent_hq_self_build(self, requirements: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Agent HQ self-build new workflows based on requirements
+        
+        Args:
+            requirements: Build requirements specification
+            
+        Returns:
+            Build results
+        """
+        return await self.agent_hq.self_build(requirements)
+    
+    def get_agent_hq_status(self) -> Dict[str, Any]:
+        """
+        Get Agent HQ status
+        
+        Returns:
+            Status dictionary
+        """
+        return self.agent_hq.get_status()
+    
+    async def create_langchain(
+        self,
+        steps: List[str],
+        initial_input: Any,
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Create and execute a LangChain workflow
+        
+        Args:
+            steps: List of chain step descriptions
+            initial_input: Initial input for the chain
+            context: Optional context information
+            
+        Returns:
+            Execution results
+        """
+        return await self.agent_hq.langchain.execute_chain_from_steps(
+            steps, initial_input, context
+        )
+    
+    async def create_langgraph(
+        self,
+        steps: List[Dict[str, Any]],
+        initial_state: Dict[str, Any],
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Create and execute a LangGraph workflow
+        
+        Args:
+            steps: List of graph step definitions
+            initial_state: Initial state for the graph
+            context: Optional context information
+            
+        Returns:
+            Execution results
+        """
+        return await self.agent_hq.langgraph.execute_graph_from_steps(
+            steps, initial_state, context
+        )
+    
+    # ===== Octopus Brain Methods =====
+    
+    def get_all_tentacles(self) -> List[Dict[str, Any]]:
+        """
+        Get all tentacles (agents) registered in Octopus Brain
+        
+        Returns:
+            List of tentacle information
+        """
+        return self.agent_hq.octopus_brain.get_all_tentacles()
+    
+    def get_tentacle_status(self, tentacle_name: str) -> Dict[str, Any]:
+        """
+        Get status of a specific tentacle
+        
+        Args:
+            tentacle_name: Name of the tentacle
+            
+        Returns:
+            Tentacle status dictionary
+        """
+        return self.agent_hq.octopus_brain.get_tentacle_status(tentacle_name)
+    
+    def get_octopus_brain_status(self) -> Dict[str, Any]:
+        """
+        Get Octopus Brain status
+        
+        Returns:
+            Brain status dictionary
+        """
+        return self.agent_hq.octopus_brain.get_status()
+    
+    async def octopus_coordinate(
+        self,
+        task: str,
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Use Octopus Brain to coordinate tentacles for a task
+        
+        Args:
+            task: Task description
+            context: Optional context information
+            
+        Returns:
+            Coordination results
+        """
+        return await self.agent_hq.octopus_brain.coordinate(task, context)
+    
+    # ===== Cloud Octopus Methods =====
+    
+    async def deploy_to_cloud(
+        self,
+        provider: str,
+        regions: List[str],
+        config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Deploy OctoGen to cloud provider
+        
+        Args:
+            provider: Cloud provider (aws, gcp, azure)
+            regions: List of regions
+            config: Optional deployment configuration
+            
+        Returns:
+            Deployment results
+        """
+        return await self.agent_hq.cloud_octopus.deploy(provider, regions, config)
+    
+    async def provision_cloud_storage(
+        self,
+        storage_types: Dict[str, bool],
+        config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Provision cloud storage resources
+        
+        Args:
+            storage_types: Dictionary of storage types to provision
+            config: Optional storage configuration
+            
+        Returns:
+            Provisioning results
+        """
+        return await self.agent_hq.cloud_octopus.provision_storage(storage_types, config)
+    
+    def get_cloud_status(self) -> Dict[str, Any]:
+        """
+        Get cloud deployment status
+        
+        Returns:
+            Cloud status dictionary
+        """
+        return self.agent_hq.cloud_octopus.get_status()
+    
+    # ===== Enterprise Cloud Octogent Methods =====
+    
+    async def deploy_to_enterprise_cloud(
+        self,
+        config: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Deploy to enterprise cloud infrastructure
+        
+        Args:
+            config: Enterprise deployment configuration
+            
+        Returns:
+            Deployment results
+        """
+        return await self.agent_hq.enterprise_octogent.deploy_enterprise(config)
+    
+    async def configure_enterprise_infrastructure(
+        self,
+        config: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Configure enterprise infrastructure
+        
+        Args:
+            config: Infrastructure configuration
+            
+        Returns:
+            Configuration results
+        """
+        return await self.agent_hq.enterprise_octogent.configure_infrastructure(config)
+    
+    def get_enterprise_octogent_status(self) -> Dict[str, Any]:
+        """
+        Get enterprise octogent status
+        
+        Returns:
+            Status dictionary
+        """
+        return self.agent_hq.enterprise_octogent.get_status()
+    
+    def get_enterprise_capacity(self) -> Dict[str, Any]:
+        """
+        Get enterprise capacity information
+        
+        Returns:
+            Capacity dictionary
+        """
+        return self.agent_hq.enterprise_octogent.get_capacity()
+    
+    def estimate_enterprise_costs(
+        self,
+        config: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Estimate enterprise deployment costs
+        
+        Args:
+            config: Optional cost configuration
+            
+        Returns:
+            Cost estimation dictionary
+        """
+        return self.agent_hq.enterprise_octogent.estimate_costs(config)

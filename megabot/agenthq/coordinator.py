@@ -212,8 +212,20 @@ class AgentHQCoordinator:
         """
         return self.agents.get(name)
     
+    def get_agent_info(self, name: str) -> Optional[Dict[str, Any]]:
+        """
+        Get information about a specific agent (alias for get_agent)
+        
+        Args:
+            name: Agent name
+            
+        Returns:
+            Agent information or None
+        """
+        return self.get_agent(name)
+    
     async def orchestrate(self, task: str, agents: Optional[List[str]] = None,
-                         mode: str = "sequential") -> Dict[str, Any]:
+                         mode: str = "sequential", context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Orchestrate multiple agents to complete a task
         
@@ -485,6 +497,7 @@ class AgentHQCoordinator:
             Status information
         """
         return {
+            "enabled": True,
             "agents": {
                 "total": len(self.agents),
                 "active": len([a for a in self.agents.values() if a["status"] == "active"]),

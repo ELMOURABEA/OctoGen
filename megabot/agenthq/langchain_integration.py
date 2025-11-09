@@ -227,6 +227,47 @@ class LangChainOrchestrator:
         
         return await self.execute_chain(chain_name, {"text": initial_text})
     
+    async def execute_chain_from_steps(
+        self,
+        steps: List[str],
+        initial_input: Any,
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Execute a chain from a list of step descriptions
+        
+        Args:
+            steps: List of step descriptions/prompts
+            initial_input: Initial input data
+            context: Optional execution context
+            
+        Returns:
+            Execution results
+        """
+        # Convert simple steps to ChainStep objects
+        chain_steps = []
+        for i, step_desc in enumerate(steps):
+            step = ChainStep(
+                name=f"step_{i+1}",
+                prompt_template=step_desc if "{" in step_desc else step_desc + " {input}",
+                inputs=["input"]
+            )
+            chain_steps.append(step)
+        
+        # Create temporary chain
+        chain_name = f"temp_chain_{id(steps)}"
+        self.create_chain(chain_name, chain_steps)
+        
+        # Execute chain
+        input_data = {"input": initial_input} if not isinstance(initial_input, dict) else initial_input
+        if context:
+            input_data.update(context)
+        
+        result = await self.execute_chain(chain_name, input_data)
+        result["steps"] = steps
+        
+        return result
+    
     def get_capabilities(self) -> List[str]:
         """
         Get list of LangChain orchestrator capabilities

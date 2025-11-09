@@ -13,14 +13,14 @@ We release patches for security vulnerabilities. Which versions are eligible for
 
 ## Reporting a Vulnerability
 
-We take the security of MEGAGENT seriously. If you have discovered a security vulnerability, we appreciate your help in disclosing it to us in a responsible manner.
+We take the security of OctoGen seriously. If you have discovered a security vulnerability, we appreciate your help in disclosing it to us in a responsible manner.
 
 ### How to Report
 
 Please report security vulnerabilities by emailing the project maintainers. **Do not use the public issue tracker for security vulnerabilities.**
 
 You can report security issues through:
-- GitHub Security Advisories: https://github.com/ELMOURABEA/MEGAGENT/security/advisories/new
+- GitHub Security Advisories: https://github.com/ELMOURABEA/OctoGen/security/advisories/new
 - Or open a private security advisory
 
 ### What to Include
@@ -43,7 +43,7 @@ Please include the following information in your report:
 
 ## Security Best Practices
 
-When using MEGAGENT:
+When using OctoGen:
 
 1. **API Keys**: Never commit API keys to version control
    - Use environment variables or secure secret management
@@ -93,7 +93,7 @@ When using MEGAGENT:
 
 ## Security Features
 
-MEGAGENT includes several security features:
+OctoGen includes several security features:
 
 1. **Input Sanitization**: Automatic removal of HTML tags and dangerous patterns
 2. **Length Validation**: Queries limited to 10,000 characters
@@ -103,7 +103,7 @@ MEGAGENT includes several security features:
 
 ## Compliance
 
-MEGAGENT is designed with security best practices in mind, but compliance requirements may vary by jurisdiction and use case. Users are responsible for ensuring their use of MEGAGENT complies with applicable laws and regulations.
+OctoGen is designed with security best practices in mind, but compliance requirements may vary by jurisdiction and use case. Users are responsible for ensuring their use of OctoGen complies with applicable laws and regulations.
 
 ## Updates and Patches
 
@@ -123,4 +123,4 @@ For security-related questions or concerns, please contact the maintainers throu
 
 ---
 
-Thank you for helping keep MEGAGENT and its users safe!
+Thank you for helping keep OctoGen and its users safe!

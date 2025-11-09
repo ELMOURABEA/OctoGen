@@ -1,5 +1,5 @@
 """
-Main entry point for MEGA-Bot
+Main entry point for OctoGen
 """
 import asyncio
 import sys
@@ -7,14 +7,14 @@ from megabot import MegaBot, Config, __version__
 
 
 async def demo():
-    """Demo of MEGA-Bot capabilities"""
+    """Demo of OctoGen capabilities"""
     print("=" * 80)
-    print("XXXL MEGA BOT - Deep Research & Multi-Platform AI Integration")
+    print("OctoGen - AI Multi-Platform Integration with Agent HQ")
     print(f"Version {__version__}")
     print("=" * 80)
     print()
     
-    # Initialize MEGA-Bot
+    # Initialize OctoGen
     config = Config()
     bot = MegaBot(config)
     
@@ -24,7 +24,7 @@ async def demo():
     
     # Display status
     print("=" * 80)
-    print("MEGA-Bot Status")
+    print("OctoGen Status")
     print("=" * 80)
     status = bot.get_status()
     print(f"Running: {status['running']}")
